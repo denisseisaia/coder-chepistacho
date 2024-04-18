@@ -2,7 +2,7 @@
 let carrito = [];
 
 // Funcionalidad del menu principal
-let menuPpal = parseInt(prompt("Ingrese una opción: \n1. Agregar producto \n2. Mostrar carrito \n3. Calcular subtotal \n4. Ir a pagar  \n0. Abandonar carrito"));
+let menuPrincipal;
 
 let total = 0;
 const iva = 0.21;
@@ -10,39 +10,40 @@ const descEfectivo = 0.2;
 const tresCuotas = 0.1;
 const seisCuotas = 0.2;
 
-while (menuPpal != 0) {    
-    switch (menuPpal) {
+while (menuPrincipal !== 0) {
+    menuPrincipal = parseInt(prompt("Ingrese una opción: \n1. Agregar producto \n2. Mostrar carrito \n3. Ir a pagar  \n0. Abandonar carrito"));
+
+    switch (menuPrincipal) {
         case 1:
-            let menuProducto = parseInt(prompt("Seleccione el número del producto que desea agregar al carrito:\n1.  " + productosCargados[0].nombre + "  $" + productosCargados[0].precio + ".-\n2.  " + productosCargados[1].nombre + "  $" + productosCargados[1].precio + ".-\n3.  " + productosCargados[2].nombre + "  $" + productosCargados[2].precio + ".-\n4.  " + productosCargados[3].nombre + "  $" + productosCargados[3].precio + ".-\n5.  " + productosCargados[4].nombre + "  $" + productosCargados[4].precio + ".-\n6.  " + productosCargados[5].nombre + "  $" + productosCargados[5].precio + ".-\n0. Volver atrás"));
-            while (menuProducto !== 0) {                
-                if (menuProducto >= 1 && menuProducto <= 6) {
-                    agregarProducto(productosCargados[menuProducto - 1]);
-                    break;
-                } else if (menuProducto === 0) {
-                    break;
+            //Muestra menu de productos para agregar
+            let menuProducto = parseInt(prompt(mostrarProductos()));
+            while (menuProducto !== 0) {
+                const seleccion = productosCargados.find(producto => producto.id === menuProducto); //Busca entre los id del array
+                if (seleccion) {
+                    agregarProducto(seleccion);
                 } else {
-                    alert("Número de producto no válido.");
+                    alert("Producto no encontrado.");
                 }
+                menuProducto = parseInt(prompt(mostrarProductos()));
             }
             break;
-    
+
         case 2:
+            //Muestra el carrito hasta el momento
             mostrarCarrito();
             break;
 
         case 3:
-            alert("🛒 Total sin impuestos: $" + calcularSubtotal() + "\nPara ver el valor final anda a Ir a pagar");
-            break;
-        
-        case 4:
+            //Muestra el subtotal y los medios de pago
             let medioPago = parseInt(prompt("Total sin impuestos: $" + calcularSubtotal() + "\n💵 Elegí el medio de pago:\n1. Efectivo o transferencia (20% de descuento)\n2. Débito \n3. Crédito (1, 3 o 6 cuotas fijas)"));
-        
+
             // Agrega impuestos y descuentos
             if (medioPago == 1) {
                 alert("Total a pagar: $" + subtotal(0, descEfectivo) + "*\n*Descuento aplicado");
             } else if (medioPago == 2) {
                 alert("Total a pagar: $" + subtotal(iva, 0) + "*\n*IVA aplicado");
             } else if (medioPago == 3) {
+                //Calcula cuotas
                 let cuotasPago = parseInt(prompt("💳 Elegir cantidad de cuotas:\n1. 1 cuota (0% de recargo)\n2. 3 cuotas (10% de recargo)\n3. 6 cuotas (20% de recargo)"));
                 if (cuotasPago == 1) {
                     alert("Total a pagar: $" + subtotal(iva, 0) + "*\n*IVA aplicado");
@@ -57,7 +58,7 @@ while (menuPpal != 0) {
                 alert("Opción inválida");
             }
             break;
-        
+
         case 0:
             alert("Abandonó el carrito");
             break;
@@ -66,9 +67,17 @@ while (menuPpal != 0) {
             alert("Opción no válida.");
             break;
     }
-    menuPpal = parseInt(prompt("Ingrese una opción: \n1. Agregar producto \n2. Mostrar carrito \n3. Calcular subtotal \n4. Ir a pagar  \n0. Abandonar carrito"));
 }
 
+// Mostrar lista de productos
+function mostrarProductos() {
+    let menu = "Seleccione el número del producto que desea agregar al carrito:\n";
+    for (let i = 0; i < productosCargados.length; i++) {
+        menu += `${i + 1}. ${productosCargados[i].nombre} $${productosCargados[i].precio}.\n`;
+    }
+    menu += "0. Volver atrás";
+    return menu;
+}
 
 // Agregar un producto al carrito
 function agregarProducto(producto) {
@@ -81,7 +90,10 @@ function mostrarCarrito() {
     let mensaje = "📦 Contenido del carrito:\n";
     carrito.forEach(producto => {
         mensaje += producto.nombre + " - $" + producto.precio + "\n";
+        total += producto.precio;
     });
+
+    mensaje += "\nSubtotal: $" + total.toFixed(2);
     alert(mensaje);
 }
 
@@ -105,10 +117,6 @@ function subtotal(impuestos, descuentos) {
     }
     return totalConDescuentos;
 }
-
-
-
-
 
 
 
