@@ -1,3 +1,4 @@
+console.table(productosCargados);
 let carrito = [];
 
 // Evento que se dispara cuando la página se carga completamente
