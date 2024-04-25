@@ -1,0 +1,91 @@
+/* INDEX */
+
+/* Banner */
+.banner{
+    background-image: url(/media/banner.png);
+    height: 650px;
+    background-size: cover;
+    background-position: right;
+    text-align: right;
+    color: $blanco;
+    text-shadow: -1px -1px 20px rgba(0,0,0,1);
+    
+    h1{ 
+        font-size: 6rem;
+        letter-spacing: -1.4px;
+        position: relative;
+        top:350px;
+        z-index: 1;
+    }
+    p{
+        font-size: 2rem;
+        font-weight: bold;
+        margin-right: 20px;
+        padding:10px 20px 10px 20px;
+        text-transform: uppercase;
+        background-color: $celeste; 
+        display: inline-block;
+        border-radius: 10px;
+        position: relative;
+        top:330px;
+    }
+}
+
+/* Presentacion */
+.about{
+    background-color: $blanco;
+    justify-content: center;
+    padding: 50px;
+    h2{
+        padding: 20px 0;
+        text-align: start;
+        font-size: 3rem;
+    }
+    img{
+        width: 200px;
+    }
+}
+
+/* Categorias */
+.categorias{
+    @include flex (row, space-around, center);
+    flex-wrap: wrap;
+    margin-top: 50px;
+    img{
+        width:420px;
+        height: 200px;
+        object-fit: cover;
+        transition: 0.4s;
+        &:hover{
+            transform:scale(1.1);
+        }
+    }  
+}
+
+
+/* Destacadas */
+.featured{
+    background-color: $blanco;
+    padding: 0 50px 50px 50px;
+    h2{
+        color: $azul;
+    }
+    .featured_recipes{
+        @include flex (row, center, center);
+        flex-wrap: wrap;
+        gap: 2em;
+        .card_box{
+            width: 320px;
+            img{
+                height: 400px;
+                object-fit: cover;
+                object-position: center;
+            }
+            .card_content{           
+                img{
+                    height: 20px;
+                }
+            }
+        }
+    }
+}

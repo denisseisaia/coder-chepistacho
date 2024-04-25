@@ -1,0 +1,16 @@
+// Variables
+$font-title: "Playfair Display", serif;
+$font-text: 'Montserrat', sans-serif;
+$celeste: #19AA9B;
+$azul: #1C4966;
+$gris: #333333;
+$gris-c: #e0e0e0;
+$blanco: #ffffff;
+
+// Mixin
+@mixin flex ($direction, $justify, $align){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}

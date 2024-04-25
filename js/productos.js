@@ -1,5 +1,3 @@
-//D
-
 const productosCargados = [
     {
         id: 1,

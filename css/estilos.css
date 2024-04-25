@@ -1,0 +1,552 @@
+/* Estilos generales */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+html {
+  font-size: 62.5%;
+  font-family: "Montserrat", sans-serif;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 6rem;
+  padding-top: 50px;
+  padding-right: 20px;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  color: #1C4966;
+  font-size: 4rem;
+  padding: 50px 0px;
+  text-align: center;
+}
+
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+a {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.fila {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header */
+header {
+  background-color: #19AA9B;
+  position: sticky;
+  top: 0px;
+  z-index: 3;
+}
+header .nav_bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+header .nav_bar img {
+  width: 150px;
+  margin: 10px;
+}
+header .nav_bar ul .nav_item {
+  list-style: none;
+  display: inline-block;
+  margin-left: 30px;
+}
+header .nav_bar ul .nav_item .nav_link {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+header .nav_bar ul .nav_item .nav_link.active, header .nav_bar ul .nav_item .nav_link:hover {
+  font-weight: 700;
+}
+
+/* Footer */
+footer {
+  background-color: #1C4966;
+  padding: 20px 0px;
+}
+footer .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer .social {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer .social img {
+  width: 21px;
+  height: 21px;
+  margin: 0 10px;
+}
+footer .footer .nav_footer {
+  padding: 20px;
+}
+footer .footer .nav_footer ul {
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+footer .footer .nav_footer ul li {
+  list-style: none;
+  margin: 0 20px;
+}
+footer .footer .nav_footer ul li a {
+  text-decoration: none;
+}
+footer .footer .nav_footer ul li:hover {
+  font-weight: 700;
+}
+
+/* INDEX */
+/* Banner */
+.banner {
+  background-image: url(/media/banner.png);
+  height: 650px;
+  background-size: cover;
+  background-position: right;
+  text-align: right;
+  color: #ffffff;
+  text-shadow: -1px -1px 20px rgb(0, 0, 0);
+}
+.banner h1 {
+  font-size: 6rem;
+  letter-spacing: -1.4px;
+  position: relative;
+  top: 350px;
+  z-index: 1;
+}
+.banner p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 10px 20px 10px 20px;
+  text-transform: uppercase;
+  background-color: #19AA9B;
+  display: inline-block;
+  border-radius: 10px;
+  position: relative;
+  top: 330px;
+}
+
+/* Presentacion */
+.about {
+  background-color: #ffffff;
+  justify-content: center;
+  padding: 50px;
+}
+.about h2 {
+  padding: 20px 0;
+  text-align: start;
+  font-size: 3rem;
+}
+.about img {
+  width: 200px;
+}
+
+/* Categorias */
+.categorias {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.categorias img {
+  width: 420px;
+  height: 200px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+.categorias img:hover {
+  transform: scale(1.1);
+}
+
+/* Destacadas */
+.featured {
+  background-color: #ffffff;
+  padding: 0 50px 50px 50px;
+}
+.featured h2 {
+  color: #1C4966;
+}
+.featured .featured_recipes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+.featured .featured_recipes .card_box {
+  width: 320px;
+}
+.featured .featured_recipes .card_box img {
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+.featured .featured_recipes .card_box .card_content img {
+  height: 20px;
+}
+
+/* PRODUCTOS */
+/* Banner */
+.banner_productos {
+  background-image: url(../media/banner.png);
+  height: 350px;
+  background-size: cover;
+  background-position: bottom;
+  text-align: right;
+  color: #ffffff;
+  text-shadow: -1px -1px 20px rgb(0, 0, 0);
+}
+.banner_productos h1 {
+  font-size: 6rem;
+  letter-spacing: -1.4px;
+  position: relative;
+  top: 90px;
+  z-index: 1;
+}
+
+/* Productos */
+.main_productos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  margin: 20px;
+}
+.main_productos .seccion_productos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 50px 50px 50px;
+  gap: 2em;
+  text-align: right;
+}
+.main_productos .seccion_productos .card_box {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main_productos .seccion_productos .card_box img {
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+.main_productos .seccion_productos .card_box h3 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #1C4966;
+  letter-spacing: -1.4px;
+  position: relative;
+  z-index: 1;
+}
+.main_productos .seccion_productos .card_box .formato {
+  font-weight: bold;
+  padding: 3px 15px 3px 15px;
+  text-transform: uppercase;
+  background-color: #19AA9B;
+  display: inline-block;
+  border-radius: 10px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  color: #ffffff;
+}
+.main_productos .seccion_productos .card_box p {
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  border-top: 1.2px solid #333333;
+  padding: 10px;
+}
+.main_productos .seccion_productos .card_box button {
+  font-size: 2rem;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  background-color: #19AA9B;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.main_productos .seccion_productos .card_box button:hover {
+  background-color: #333333;
+  font-weight: 600;
+}
+.main_productos .carrito {
+  background-color: #e0e0e0;
+  width: 30%;
+  border-radius: 20px;
+  box-shadow: 1px 1px 100px rgb(0, 0, 0);
+}
+.main_productos .carrito .tabla_carrito {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+}
+.main_productos .carrito .tabla_carrito th {
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  border-bottom: 1.2px solid #333333;
+  padding: 0 20px 0px 20px;
+}
+.main_productos .carrito .tabla_carrito .productos_agregados {
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding-top: 20px;
+}
+.main_productos .carrito .tabla_carrito .productos_agregados img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+  margin-top: 20px;
+}
+.main_productos .carrito .tabla_carrito .productos_agregados p {
+  font-weight: 700;
+}
+.main_productos .carrito .final_carrito {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #19AA9B;
+}
+.main_productos .carrito .final_carrito h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: right;
+  padding-right: 50px;
+}
+.main_productos .carrito .final_carrito .vaciar_carrito {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 3px 15px 3px 15px;
+  text-transform: uppercase;
+  background-color: #1C4966;
+  border-radius: 10px;
+  color: #ffffff;
+  border: none;
+}
+.main_productos .carrito .eliminar_producto {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 3px 15px 3px 15px;
+  text-transform: uppercase;
+  background-color: #1C4966;
+  border-radius: 10px;
+  color: #ffffff;
+  border: none;
+}
+
+/* CONTACTO */
+/* Banner */
+.banner_contacto {
+  background-image: url(../media/banner.png);
+  height: 350px;
+  background-size: cover;
+  background-position: bottom;
+  text-align: right;
+  color: #ffffff;
+  text-shadow: -1px -1px 20px rgb(0, 0, 0);
+}
+.banner_contacto h1 {
+  font-size: 6rem;
+  letter-spacing: -1.4px;
+  position: relative;
+  top: 90px;
+  z-index: 1;
+}
+
+/* Contacto */
+.contacto {
+  padding: 50px;
+}
+.contacto .card_box {
+  width: 600px;
+  background-color: #e0e0e0;
+}
+.contacto .card_box .card_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+.contacto .card_box .card_content .card_form {
+  width: 90%;
+  margin-top: 20px;
+  text-align: center;
+}
+.contacto .card_box .card_content .card_form .datos_completar {
+  font-size: 1.5rem;
+}
+.contacto .card_box .card_content button {
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  margin-top: 20px;
+  width: 100px;
+  background-color: #19AA9B;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.contacto .card_box .card_content button:hover {
+  background-color: #333333;
+  font-weight: 600;
+}
+
+/* MEDIA QUERIES */
+/* Mobile */
+@media (max-width: 480px) {
+  /*Header*/
+  .hamburguesa {
+    border: rgba(255, 255, 255, 0.5) solid 2px;
+  }
+  /*Index*/
+  h1 {
+    font-size: 5rem;
+    padding-top: 25px;
+    padding-left: 25px;
+  }
+  h2 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .banner p {
+    padding-left: 25px;
+  }
+  .about {
+    padding: 30px;
+  }
+  .about h2 {
+    padding: 20px 0;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .about p {
+    text-align: center;
+  }
+  .about img {
+    width: 150px;
+    padding: 20px 0;
+  }
+  .categories .circle {
+    width: 260px;
+    height: 260px;
+  }
+  .categories .circle a h3 {
+    font-size: 1.8rem;
+    bottom: 150px;
+  }
+  .featured {
+    padding: 0 20px 30px 20px;
+  }
+  /*Recetas*/
+  .banner_recetas {
+    height: 250px;
+  }
+  .recipes_page {
+    padding: 0 20px 30px 20px;
+  }
+  /*Contacto*/
+  .banner_contacto {
+    height: 250px;
+  }
+  .contacto {
+    padding: 50px 20px 50px 20px;
+  }
+  .contacto .card_box {
+    width: auto;
+  }
+}
+/* Tablet */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .hamburguesa {
+    border: rgba(255, 255, 255, 0.5) solid 2px;
+  }
+  h2 {
+    font-size: 4rem;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  .about {
+    padding: 30px;
+  }
+  .about h2 {
+    padding: 20px 0;
+    text-align: center;
+  }
+  .about p {
+    text-align: center;
+  }
+  .about img {
+    padding: 20px 0;
+  }
+  .categories .circle {
+    width: 280px;
+    height: 280px;
+  }
+  .categories .circle a h3 {
+    font-size: 2rem;
+    bottom: 160px;
+  }
+  .featured {
+    padding: 0 30px 30px 30px;
+  }
+  /*Recetas*/
+  .recipes_page {
+    padding: 0 30px 30px 30px;
+  }
+}
+
+/*# sourceMappingURL=estilos.css.map */

@@ -1,0 +1,62 @@
+@import "generales/variables";
+
+/* Estilos generales */
+// font-size: 62,5%; (Para que 1rem=10px).
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+html{
+    font-size: 62.5%;
+    font-family: $font-text;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+h1{
+    font-family: $font-title;
+    font-weight: 900;
+    font-size: 6rem;
+    padding-top: 50px;
+    padding-right: 20px;
+}
+
+h2{
+    font-family: $font-title;
+    font-weight: 900;
+    color: $azul;
+    font-size: 4rem;
+    padding: 50px 0px;
+    text-align: center;
+}
+
+h3{
+    font-family: $font-title;
+    font-weight: 900;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+p{
+    font-size: 1.5rem;
+}
+
+a{
+    color: $blanco;
+    font-size: 1.5rem;
+}
+
+.fila{
+    max-width: 100%;
+    @include flex (row, center, center);
+}
+
+@import "generales/headerFooter";
+@import "page/index";
+@import "page/productos";
+@import "page/contacto";
+
+@import "generales/mediaQ";

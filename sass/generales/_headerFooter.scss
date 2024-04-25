@@ -1,0 +1,64 @@
+/* Header */
+header{
+    background-color: $celeste;
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+    .nav_bar{
+        @include flex (row, space-between, center);
+        img{
+            width: 150px;
+            margin: 10px;
+        }
+        ul{
+            .nav_item{
+                list-style: none;
+                display: inline-block;
+                margin-left: 30px;
+                .nav_link{
+                    color: $blanco;
+                    font-size: 1.5rem;
+                    &.active, &:hover{
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Footer */
+footer{
+    background-color: $azul;
+    padding: 20px 0px;
+    .footer{
+        @include flex (row, center, center);
+        .social{
+            @include flex (row, center, center);
+            img{
+                width: 21px;
+                height: 21px;
+                margin: 0 10px;
+            }
+        }
+        .nav_footer{
+            padding: 20px;
+            ul{
+                padding-left: 0;
+                @include flex (row, center, center);
+                flex-wrap: wrap;
+                li{
+                    list-style: none;
+                    margin: 0 20px;
+                    a{
+                        text-decoration: none;
+                    }
+                    &:hover{
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,59 @@
+/* CONTACTO */
+
+/* Banner */
+.banner_contacto{
+    background-image: url(../media/banner.png);
+    height: 350px;
+    background-size: cover;
+    background-position: bottom;
+    text-align: right;
+    color: $blanco;
+    text-shadow: -1px -1px 20px rgba(0,0,0,1);
+    h1{ 
+        font-size: 6rem;
+        letter-spacing: -1.4px;
+        position: relative;
+        top:90px;
+        z-index: 1;
+    }
+}
+
+/* Contacto */
+.contacto{
+    padding: 50px;
+    .card_box{
+        width: 600px;
+        background-color: $gris-c;
+        .card_content{
+            @include flex (column, center, center);
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            .card_form{
+                width: 90%;
+                margin-top: 20px;
+                text-align: center;
+                .datos_completar{
+                    font-size: 1.5rem;
+                }
+            }
+            button{
+                font-size: 1.5rem;
+                font-weight: 600;
+                border: none;
+                margin-top: 20px;
+                width: 100px;
+                background-color: $celeste;
+                color: $blanco;
+                text-transform: uppercase;
+    
+                &:hover{
+                    background-color: $gris;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
+

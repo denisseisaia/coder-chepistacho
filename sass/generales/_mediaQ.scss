@@ -1,0 +1,122 @@
+/* MEDIA QUERIES */
+
+/* Mobile */
+@media  (max-width:480px) {
+    /*Header*/
+    .hamburguesa{
+       border: rgba(255, 255, 255, 0.5) solid 2px;
+    }
+
+    /*Index*/
+    h1{
+        font-size: 5rem;
+        padding-top: 25px;
+        padding-left: 25px;
+    }
+    h2{
+        font-size: 3rem;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .banner{        
+        p{
+            padding-left: 25px; 
+        }
+    }
+    .about{
+        padding: 30px;
+        h2{
+            padding: 20px 0;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        p{
+            text-align: center;
+        }
+        img{
+            width: 150px;
+            padding: 20px 0;
+        }
+    }
+    .categories{
+        .circle{
+            width: 260px;
+            height: 260px;
+            a{
+                h3{
+                    font-size: 1.8rem;
+                    bottom: 150px;
+                }
+             }
+        }
+    }
+    .featured{
+        padding: 0 20px 30px 20px;        
+    }
+
+    /*Recetas*/
+    .banner_recetas{
+        height: 250px;
+    }
+    .recipes_page{
+        padding: 0 20px 30px 20px;
+    }
+
+    /*Contacto*/
+    .banner_contacto{
+        height: 250px;
+    }
+    .contacto{
+        padding: 50px 20px 50px 20px;
+        .card_box{
+            width: auto;
+        }
+    }
+}
+
+/* Tablet */
+@media  (min-width:481px) and (max-width:1024px) {
+    .hamburguesa{
+        border: rgba(255, 255, 255, 0.5) solid 2px;
+    }
+    h2{
+        font-size: 4rem;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .about{
+        padding: 30px;
+        h2{
+            padding: 20px 0;
+            text-align: center;
+        }
+        p{
+            text-align: center;
+        }
+        img{
+            padding: 20px 0;
+        }
+    }
+    .categories{
+        .circle{
+            width: 280px;
+            height: 280px;
+            a{
+                h3{
+                    font-size: 2rem;
+                    bottom: 160px;
+                }
+             }
+        }
+    }
+
+    .featured{
+        padding: 0 30px 30px 30px;        
+    }
+
+    /*Recetas*/
+    .recipes_page{
+        padding: 0 30px 30px 30px;
+    }
+
+}
