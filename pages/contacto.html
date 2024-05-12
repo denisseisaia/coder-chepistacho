@@ -27,6 +27,10 @@
                         </li>
                         <li class="nav-item nav_item"><a class="nav-link nav_link active" aria-current="page" href="./contacto.html">CONTACTO</a>
                         </li>
+                        <!-- Botón carrito -->
+                        <button class="btn btn-primary boton-carrito" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoOffcanvas" aria-controls="carritoOffcanvas">
+                            <i class="fas fa-shopping-cart"></i> 
+                        </button>
                     </ul>
                 </div>
             </div>
@@ -45,7 +49,7 @@
                 <div class="card-body card_content col-12">
                     <div>
                         <h3 class="text-center">Formulario de contacto</h3>
-                        <p>Si tenes alguna duda o sugerencia, llena esta formulario para poder estar en contacto!</p>
+                        <p>Si tenes alguna duda o consulta, llena esta formulario para poder estar en contacto!</p>
                     </div>
                     <div class="card_form">
                         <label for="exampleFormControlInput1" class="form-label datos_completar">Nombre</label>
@@ -63,6 +67,32 @@
                 </div>
             </div>
         </section>
+        <div class="offcanvas offcanvas-end carrito" tabindex="-1" id="carritoOffcanvas" aria-labelledby="carritoOffcanvasLabel">
+            <div class="offcanvas-header carrito_header">
+                <h3 class="offcanvas-title" id="carritoOffcanvasLabel">Tu Carrito</h3>
+                <button id="vaciarCarrito" class="vaciar_carrito btn btn-danger">Vaciar Carrito</button>
+                <button type="button" class="btn-close text-reset cerrar" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body offcanvas_body">
+              <!-- Contenido del Carrito -->
+                <table class="table tabla_carrito">
+                    <tr class="productos_agregados">
+                        <td></td>
+                    </tr>
+                    <tbody id="productosAgregados" class="productos_agregados">
+                    <!-- Aquí se mostrarán los productos en el carrito -->
+                    </tbody>
+                </table>
+                <div class="final_carrito">
+                    <tr>
+                        <h3>Total a pagar: $<span id="totalCarrito"></span></h3>
+                    </tr>
+                    <div>
+                        <button id="finalizarCompra" class="finalizar_compra">COMPRAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <section class="footer">
@@ -91,7 +121,8 @@
         </section>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="./js/productos.js"></script>
+    <script src="https://kit.fontawesome.com/aecfc4a848.js" crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

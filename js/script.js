@@ -1,5 +1,70 @@
-console.table(productosCargados);
 let carrito = [];
+
+// Carga productos desde JSON
+function productosCargados() {
+    fetch('../js/productos.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos de productos');
+            }
+            return response.json();
+        })
+        .then(productos => {
+            mostrarTodo(productos);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+productosCargados();
+
+// Carga destacados desde JSON
+function productosDestacadosCargados() {
+    fetch('../js/productos.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar los datos de productos');
+            }
+            return response.json();
+        })
+        .then(productos => {
+            const productosDestacados = productos.filter(prod => prod.destacado === "SI");
+            mostrarProductosDestacados(productosDestacados);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+productosDestacadosCargados();
+
+// Vaciar el carrito
+document.getElementById('vaciarCarrito').addEventListener('click', () => {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará todos los productos del carrito. ¿Deseas continuar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, vaciar carrito',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            carrito = [];
+            actualizarCarrito();
+            Swal.fire('¡Carrito vaciado!', '', 'success');
+        }
+    });
+});
+
+// Actualizar el carrito en el almacenamiento local
+function actualizarCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    mostrarProductosEnCarrito();
+    actualizarTotalCarrito();
+}
 
 // Evento que se dispara cuando la página se carga completamente
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,64 +75,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Vaciar carrito
-document.getElementById('vaciarCarrito').addEventListener('click', () => {
-    carrito = [];
-    actualizarCarritoEnStorage();
-    mostrarProductosEnCarrito();
-    actualizarTotalCarrito();
-});
-
 // Eliminar producto del carrito
 document.getElementById('productosAgregados').addEventListener('click', (event) => {
     if (event.target.classList.contains('eliminar')) {
         const id = parseInt(event.target.dataset.id);
-        carrito = carrito.filter(producto => producto.id !== id);
-        actualizarCarritoEnStorage();
-        mostrarProductosEnCarrito();
-        actualizarTotalCarrito();
+        const index = carrito.findIndex(item => item.id === id);
+        if (index !== -1) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+            Swal.fire('¡Producto eliminado!', '', 'success');
+        }
+    } else if (event.target.classList.contains('aumentar-cantidad')) {
+        const id = parseInt(event.target.dataset.id);
+        const producto = carrito.find(item => item.id === id);
+        if (producto) {
+            producto.cantidad += 1;
+            actualizarCarrito();
+        }
+    } else if (event.target.classList.contains('disminuir-cantidad')) {
+        const id = parseInt(event.target.dataset.id);
+        const producto = carrito.find(item => item.id === id);
+        if (producto && producto.cantidad > 1) {
+            producto.cantidad -= 1;
+            actualizarCarrito();
+        }
     }
 });
 
-// Productos en carrito
+// Mostrar los productos en el carrito
 function mostrarProductosEnCarrito() {
     const productosAgregados = document.getElementById('productosAgregados');
     productosAgregados.innerHTML = '';
     let totalCarrito = 0;
     carrito.forEach(producto => {
-        totalCarrito += producto.precio;
+        totalCarrito += producto.precio * producto.cantidad;
         productosAgregados.innerHTML += `
         <tr class="productos_agregados">
             <td><img src="${producto.img1}" alt="${producto.nombre}"></td>
-            <td>${producto.nombre}</td>
-            <td><p>$${producto.precio}</p></td>
-            <td><button class="eliminar eliminar_producto" data-id="${producto.id}">Eliminar</button></td>
+            <td>
+                <div>${producto.nombre}</div>
+                <div>
+                    <button class="disminuir-cantidad" data-id="${producto.id}">-</button>
+                    <span>${producto.cantidad}</span> <!-- Cantidad -->
+                    <button class="aumentar-cantidad" data-id="${producto.id}">+</button>
+                </div>
+            </td>
+            <td>
+                <span>$${producto.precio * producto.cantidad}</span>
+                <button class="eliminar eliminar_producto" data-id="${producto.id}">Eliminar</button>
+            </td>
         </tr>`;
     });
     document.getElementById('totalCarrito').textContent = totalCarrito;
 }
 
-// Actualizar el carrito en el Storage
-function actualizarCarritoEnStorage() {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-}
+// Evento para finalizar la compra
+document.getElementById('finalizarCompra').addEventListener('click', () => {
+    Swal.fire({
+        title: '¡Compra exitosa!',
+        text: '¡Gracias por tu compra!',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    }).then(() => {
+        carrito = [];
+        actualizarCarrito();
+    });
+});
 
-//Agregar productos
-function agregarProductos(producto) {
-    carrito.push(producto);
-    actualizarCarritoEnStorage();
-    mostrarProductosEnCarrito();
-}
 
-//Actualizar carrito
+// Actualizar el total del carrito
 function actualizarTotalCarrito() {
-    const totalCarrito = carrito.reduce((total, producto) => total + producto.precio, 0);
+    const totalCarrito = carrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
     document.getElementById('totalCarrito').textContent = totalCarrito;
 }
 
-//Mostrar todos los productos
+// Agregar productos al carrito
+function agregarProductos(producto) {
+    const productoExistente = carrito.find(item => item.id === producto.id);
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+    } else {
+        producto.cantidad = 1;
+        carrito.push(producto);
+    }
+    actualizarCarrito();
+}
+
+// Mostrar todos los productos
 function mostrarTodo(listaProductos) {
     const galeriaProductos = document.getElementById('seccionProductos');
+    galeriaProductos.innerHTML = ''; 
     listaProductos.forEach(prod => {
         galeriaProductos.innerHTML += `
         <div class="card card_box">
@@ -77,7 +174,7 @@ function mostrarTodo(listaProductos) {
                 <p class="card-text formato">${prod.formato}</p>
                 <p class="card-text">Precio $${prod.precio}</p>
             </div>
-            <button class="btn btn-primary compra" data-id="${prod.id}">Comprar</button>
+            <button class="compra" data-id="${prod.id}">Comprar</button>
         </div>`;
     });
 
@@ -89,198 +186,33 @@ function mostrarTodo(listaProductos) {
     });
 }
 
-mostrarTodo(productosCargados);
 
+//Mostrar productos destacados
+function mostrarProductosDestacados(listaProductos) {
+    const productosDestacados = listaProductos.filter(prod => prod.destacado === "SI");
 
-//SEGUNDA PREENTREGA
+    const galeriaProductos = document.getElementById('seccionDestacados');
+    galeriaProductos.innerHTML = '';
+    
+    productosDestacados.forEach(prod => {
+        const productoCard = document.createElement('div');
+        productoCard.classList.add('card', 'card_box');
+        productoCard.innerHTML = `
+            <img src="${prod.img1}" class="card-img-top imagen_card" alt="${prod.nombre}">
+            <div class="card-body">
+                <h3 class="card-title">${prod.nombre}</h3>
+                <p class="card-text formato">${prod.formato}</p>
+                <p class="card-text">Precio $${prod.precio}</p>
+            </div>
+            <button class="compra" data-id="${prod.id}">Comprar</button>
+        `;
+        galeriaProductos.appendChild(productoCard);
 
-/*// Declaro el carrito
-let carrito = [];
-
-// Funcionalidad del menu principal
-let menuPrincipal;
-
-let total = 0;
-const iva = 0.21;
-const descEfectivo = 0.2;
-const tresCuotas = 0.1;
-const seisCuotas = 0.2;
-
-while (menuPrincipal !== 0) {
-    menuPrincipal = parseInt(prompt("Ingrese una opción: \n1. Agregar producto \n2. Mostrar carrito \n3. Ir a pagar  \n0. Abandonar carrito"));
-
-    switch (menuPrincipal) {
-        case 1:
-            //Muestra menu de productos para agregar
-            let menuProducto = parseInt(prompt(mostrarProductos()));
-            while (menuProducto !== 0) {
-                const seleccion = productosCargados.find(producto => producto.id === menuProducto); //Busca entre los id del array
-                if (seleccion) {
-                    agregarProducto(seleccion);
-                } else {
-                    alert("Producto no encontrado.");
-                }
-                menuProducto = parseInt(prompt(mostrarProductos()));
-            }
-            break;
-
-        case 2:
-            //Muestra el carrito hasta el momento
-            mostrarCarrito();
-            break;
-
-        case 3:
-            //Muestra el subtotal y los medios de pago
-            let medioPago = parseInt(prompt("Total sin impuestos: $" + calcularSubtotal() + "\n💵 Elegí el medio de pago:\n1. Efectivo o transferencia (20% de descuento)\n2. Débito \n3. Crédito (1, 3 o 6 cuotas fijas)"));
-
-            // Agrega impuestos y descuentos
-            if (medioPago == 1) {
-                alert("Total a pagar: $" + subtotal(0, descEfectivo) + "*\n*Descuento aplicado");
-            } else if (medioPago == 2) {
-                alert("Total a pagar: $" + subtotal(iva, 0) + "*\n*IVA aplicado");
-            } else if (medioPago == 3) {
-                //Calcula cuotas
-                let cuotasPago = parseInt(prompt("💳 Elegir cantidad de cuotas:\n1. 1 cuota (0% de recargo)\n2. 3 cuotas (10% de recargo)\n3. 6 cuotas (20% de recargo)"));
-                if (cuotasPago == 1) {
-                    alert("Total a pagar: $" + subtotal(iva, 0) + "*\n*IVA aplicado");
-                } else if (cuotasPago == 2) {
-                    alert("Total a pagar: $" + subtotal(iva + tresCuotas, 0) + "*\n*IVA y recargos aplicados");
-                } else if (cuotasPago == 3) {
-                    alert("Total a pagar: $" + subtotal(iva + seisCuotas, 0).toFixed(0) + "*\n*IVA y recargos aplicados");
-                } else {
-                    alert("Opción inválida");
-                }
-            } else {
-                alert("Opción inválida");
-            }
-            break;
-
-        case 0:
-            alert("Abandonó el carrito");
-            break;
-
-        default:
-            alert("Opción no válida.");
-            break;
-    }
-}
-
-// Mostrar lista de productos
-function mostrarProductos() {
-    let menu = "Seleccione el número del producto que desea agregar al carrito:\n";
-    for (let i = 0; i < productosCargados.length; i++) {
-        menu += `${i + 1}. ${productosCargados[i].nombre} $${productosCargados[i].precio}.\n`;
-    }
-    menu += "0. Volver atrás";
-    return menu;
-}
-
-// Agregar un producto al carrito
-function agregarProducto(producto) {
-    carrito.push(producto);
-    alert("🛒 Producto agregado al carrito:\n" + producto.nombre + " - $" + producto.precio);
-}
-
-// Mostrar el contenido del carrito
-function mostrarCarrito() {
-    let mensaje = "📦 Contenido del carrito:\n";
-    carrito.forEach(producto => {
-        mensaje += producto.nombre + " - $" + producto.precio + "\n";
-        total += producto.precio;
+        // Agregar evento de click al botón "Comprar"
+        const botonComprar = productoCard.querySelector('.compra');
+        botonComprar.addEventListener('click', () => {
+            const productoSeleccionado = listaProductos.find(p => p.id === parseInt(botonComprar.dataset.id));
+            agregarProductos(productoSeleccionado);
+        });
     });
-
-    mensaje += "\nSubtotal: $" + total.toFixed(2);
-    alert(mensaje);
 }
-
-// Calcular el subtotal de la compra
-function calcularSubtotal() {
-    total = 0; 
-    carrito.forEach(producto => {
-        total += producto.precio;
-    });
-    return total;
-}
-
-// Calcular total con impuestos y descuentos
-function subtotal(impuestos, descuentos) {
-    let totalConImpuestos = total * (1 + impuestos);
-    let totalConDescuentos;
-    if (descuentos !== 0) {
-        totalConDescuentos = totalConImpuestos * (1 - descuentos);
-    } else {
-        totalConDescuentos = totalConImpuestos;
-    }
-    return totalConDescuentos;
-}/*
-
-
-
-//PRIMER ENTREGA
-
-/*let prodFisico = parseInt(prompt('Agregar producto al carrito:\n1. Agenda diaria _____ $20.000.-\n2. Agenda semanal _____ $15.000.-\n3. Agenda perpetua _____ $15.000.-\n4. Cuaderno de notas _____ $10.000.-\n0. Checkout'));
-
-let total = 0;
-const iva = 0.21;
-const descEfectivo = 0.2;
-const tresCuotas = 0.1;
-const seisCuotas = 0.2;
-
-
-while (prodFisico != 0) {
-    switch (prodFisico) {
-        case 1:
-            total += 20000;
-            alert('🛒 Agregaste Agenda diaria al carrito. Monto total: $' + total);
-            break;
-        case 2:
-            total += 15000;
-            alert('🛒 Agregaste Agenda semanal al carrito. Monto total: $' + total);
-            break;
-        case 3:
-            total += 15000;
-            alert('🛒 Agregaste Agenda perpetua al carrito. Monto total: $' + total);
-            break;
-        case 4:
-            total += 10000;
-            alert('🛒 Agregaste Cuaderno de notas al carrito. Monto total: $' + total);
-            break;
-        default:
-            alert('Ese producto no está disponible');
-            break;
-    }
-
-    prodFisico = parseInt(prompt('Agregar producto al carrito:\n1. Agenda diaria _____ $20.000.-\n2. Agenda semanal _____ $15.000.-\n3. Agenda perpetua _____ $15.000.-\n4. Cuaderno de notas _____ $10.000.-\n0. Checkout'));
-}
-
-let medioPago = prompt ('Total sin impuestos: $'+total+'\nElegí el medio de pago:\n1. Efectivo o transferencia (20% de descuento)\n2. Débito \n3. Crédito (1, 3 o 6 cuotas fijas)');
-
-if (medioPago == 1){
-    alert ('Total a pagar: $'+ subtotal(0,descEfectivo)+'*\n*Descuento aplicado');
-}else if (medioPago == 2){
-    alert ('Total a pagar: $'+ subtotal(iva,0)+'*\n*IVA aplicado');
-}else if (medioPago == 3){
-    let cuotasPago = parseInt(prompt ('Elegir cantidad de cuotas:\n1. 1 cuota (0% de recargo).\n2. 3 cuotas (10% de recargo).\n3. 6 cuotas (20% de recargo).'));
-    if (cuotasPago == 1){
-        alert ('Total a pagar: $'+ subtotal(iva,0)+'*\n*IVA aplicado');
-    } else if (cuotasPago == 2){
-        alert ('Total a pagar: $'+ subtotal(iva + tresCuotas,0)+'*\n*IVA y recargos aplicados');
-    } else if (cuotasPago == 3){
-        alert ('Total a pagar: $'+ subtotal(iva + seisCuotas,0).toFixed(0)+'*\n*IVA y recargos aplicados');
-    }else{
-        alert('Opción inválida');
-    }
-}else{
-    alert('Opción inválida');
-}
-
-function subtotal(impuestos,descuentos){
-    let totalConImpuestos = total * (1+impuestos);
-    let totalConDescuentos;
-    if (descuentos != 0){
-        totalConDescuentos = totalConImpuestos * (1-descuentos);
-    }else {
-        totalConDescuentos = totalConImpuestos;
-    }
-    return totalConDescuentos;
-}*/

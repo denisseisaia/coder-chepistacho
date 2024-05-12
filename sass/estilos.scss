@@ -54,6 +54,107 @@ a{
     @include flex (row, center, center);
 }
 
+.carrito{
+    .carrito_header{
+        @include flex (row, space-between,center);
+        padding: 1rem;
+        h3{
+            font-weight: 900;
+            text-align: center;
+        }
+        .vaciar_carrito{
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding:3px 15px 3px 15px;
+            text-transform: uppercase;
+            background-color: $azul;
+            border-radius: 10px;
+            color: $blanco;
+            border: none;
+        }
+        .cerrar{
+            margin: 0;
+        }
+    }
+    .offcanvas_body{
+        @include flex (column, space-between,center);
+        --bs-offcanvas-padding-x: 0rem;
+        --bs-offcanvas-padding-y: 0rem;
+        .tabla_carrito{
+            width: 100%;
+            border-collapse: collapse;            
+            margin-bottom: 50px;
+            th{
+                font-weight: bold;
+                text-align: center;
+                font-size: 2rem;            
+                text-transform: uppercase;
+                border-bottom: 1.2px solid $gris; 
+                padding: 0 20px 0px 20px;
+            }
+            .productos_agregados{
+                text-align: center;
+                font-size: 1.5rem;            
+                text-transform: uppercase;
+                padding-top: 20px;
+                td {
+                    vertical-align: middle;
+                }
+                img{
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    object-position: center;
+                    margin-top: 20px;
+                }
+                p{
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                }
+    
+            }
+            .eliminar_producto{
+                font-weight: bold;
+                font-size: 1.2rem;
+                padding:3px 15px 3px 15px;
+                text-transform: uppercase;
+                background-color: $azul;
+                border-radius: 10px;
+                color: $blanco;
+                border: none;
+            }  
+        }
+        .final_carrito{
+            @include flex (row, space-between,center);
+            background-color: $celeste;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            padding: 15px;
+            h3{
+                font-family: $font-text;
+                font-size: 1.8rem;
+                font-weight: 600;
+                border: none;
+                color: $blanco;
+                text-transform: uppercase;
+                text-align: right;  
+            }
+            .finalizar_compra{
+                font-weight: bold;
+                font-size: 1.2rem;
+                padding:3px 15px 3px 15px;
+                text-transform: uppercase;
+                background-color: $azul;
+                border-radius: 10px;
+                color: $blanco;
+                border: none;
+            }
+            
+        }    
+    }   
+}
+
 @import "generales/headerFooter";
 @import "page/index";
 @import "page/productos";

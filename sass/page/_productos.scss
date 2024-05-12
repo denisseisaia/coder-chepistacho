@@ -19,145 +19,63 @@
 }
 
 /* Productos */
-.main_productos{
-    @include flex (row ,center,top);
-    margin: 20px;
-    .seccion_productos{
-        @include flex (row, center,center);
-        flex-wrap: wrap;
-        padding: 0 50px 50px 50px;
-        gap: 2em;
-        text-align: right;
-        .card_box{
-            width: 400px;
-            @include flex (column, center,center);
-            img{
-                height: 400px;
-                object-fit: cover;
-                object-position: center;
-            }
-            h3{ 
-                font-size: 3.2rem;
-                font-weight: 900;
-                color: $azul;
-                letter-spacing: -1.4px;
-                position: relative;
-                z-index: 1;
-            }
-            .formato{
-                font-weight: bold;
-                padding:3px 15px 3px 15px;
-                text-transform: uppercase;
-                background-color: $celeste; 
-                display: inline-block;
-                border-radius: 10px;
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                border: none;
-                color: $blanco;
-            }
-            p{
-                font-weight: bold;
-                text-align: center;
-                font-size: 2rem;            
-                text-transform: uppercase;;
-                border-top: 1.2px solid $gris; 
-                padding: 10px;
-            }
-            button{
-                font-size: 2rem;
-                font-weight: 600;
-                border: none;
-                padding: 10px;
-                width: 100%;
-                background-color: $celeste;
-                color: $blanco;
-                text-transform: uppercase;
-    
-                &:hover{
-                    background-color: $gris;
-                    font-weight: 600;
-                }
-            }
+.seccion_productos{
+    @include flex (row, center,center);
+    flex-wrap: wrap;
+    padding: 0 50px 50px 50px;
+    gap: 2em;
+    text-align: right;
+    .card_box{
+        width: 400px;
+        @include flex (column, center,center);
+        img{
+            height: 400px;
+            object-fit: cover;
+            object-position: center;
         }
-    }
-    .carrito{
-        background-color: $gris-c;
-        width: 30%;
-        border-radius: 20px;
-        box-shadow: 1px 1px 100px rgba(0,0,0,1);
-        .tabla_carrito{
-            width: 100%;
-            border-collapse: collapse;            
-            margin-bottom: 50px;
-            th{
-                font-weight: bold;
-                text-align: center;
-                font-size: 2rem;            
-                text-transform: uppercase;;
-                border-bottom: 1.2px solid $gris; 
-                padding: 0 20px 0px 20px;
-            }
-            .productos_agregados{
-                text-align: center;
-                font-size: 1.5rem;            
-                text-transform: uppercase;
-                padding-top: 20px;
-                img{
-                    width: 100px;
-                    height: 100px;
-                    object-fit: cover;
-                    object-position: center;
-                    margin-top: 20px;
-                }
-                p{
-                    font-weight: 700;
-                }
-            }
-            
+        h3{ 
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: $azul;
+            letter-spacing: -1.4px;
+            position: relative;
+            z-index: 1;
         }
-        .final_carrito{
-            @include flex (row, space-around,center);
-            background-color: $celeste;
-            h3{
-                font-family: $font-text;
-                font-size: 2rem;
-                font-weight: 600;
-                border: none;
-                padding: 10px;
-                color: $blanco;
-                text-transform: uppercase;
-                text-align: right;
-                padding-right: 50px;
-    
-            }
-            .vaciar_carrito{
-                font-weight: bold;
-                font-size: 1.2rem;
-                padding:3px 15px 3px 15px;
-                text-transform: uppercase;
-                background-color: $azul;
-                border-radius: 10px;
-                color: $blanco;
-                border: none;
-            }
-        }    
-        .eliminar_producto{
+        .formato{
             font-weight: bold;
-            font-size: 1.2rem;
             padding:3px 15px 3px 15px;
             text-transform: uppercase;
-            background-color: $azul;
+            background-color: $celeste; 
+            display: inline-block;
             border-radius: 10px;
-            color: $blanco;
+            position: absolute;
+            top: 15px;
+            right: 15px;
             border: none;
-    
-        }    
-        
+            color: $blanco;
+        }
+        p{
+            font-weight: bold;
+            text-align: center;
+            font-size: 2rem;            
+            text-transform: uppercase;;
+            border-top: 1.2px solid $gris; 
+            padding: 10px;
+        }
+        button{
+            font-size: 2rem;
+            font-weight: 600;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            background-color: $celeste;
+            color: $blanco;
+            text-transform: uppercase;
+
+            &:hover{
+                background-color: $gris;
+                font-weight: 600;
+            }
+        }
     }
 }
-
-
-
-
