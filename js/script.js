@@ -21,7 +21,7 @@ productosCargados();
 
 // Carga destacados desde JSON
 function productosDestacadosCargados() {
-    fetch('./js/productos.json')
+    fetch('../js/productos.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al cargar los datos de productos');
